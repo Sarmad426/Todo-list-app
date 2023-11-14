@@ -1,40 +1,24 @@
 "use client";
 
-import { toast } from "react-hot-toast";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import {
-  Form,
-  FormItem,
-  FormField,
-  FormControl,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SendHorizonal } from "lucide-react";
-
-const formSchema = z.object({
-  name: z.string().min(1, { message: "Enter Task" }),
-});
-
-type formSchemaType = z.infer<typeof formSchema>;
+import { handleNewTodo } from "@/actions/actions";
+import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const TodoForm = () => {
+  const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
-  const form = useForm<formSchemaType>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-    },
-  });
-
-  const onSubmit = async (values: formSchemaType) => {
+  const router = useRouter();
+  const handleTodo = (e: FormEvent) => {
+    e.preventDefault();
     try {
       setLoading(true);
+      handleNewTodo(title);
+      router.refresh();
+      toast.success("Todo added successfully");
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong.");
@@ -42,36 +26,30 @@ const TodoForm = () => {
       setLoading(false);
     }
   };
+
   return (
-    <Form {...form}>
-      <form className="" onSubmit={form.handleSubmit(onSubmit)}>
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel htmlFor="store-name">New Task</FormLabel>
-              <FormControl>
-                <Input
-                  type="text"
-                  disabled={loading}
-                  placeholder="Task Name"
-                  id="task-name"
-                  {...field}
-                  className="border p-2 w-full"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+    <div className="flex flex-col items-center justify-center my-6 py-4">
+      <h2 className="text-3xl font-semibold my-4">Todo App</h2>
+      <p className="my-3 text-muted-foreground">Remember it for future</p>
+      <form
+        onSubmit={handleTodo}
+        className="flex items-center justify-center w-full gap-6 my-6"
+      >
+        <Input
+          type="text"
+          name="todo"
+          placeholder="New Task Here..."
+          className="w-full lg:w-1/3 md:w-1/2"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          disabled={loading}
+          required
         />
-        <div className="flex justify-end items-center w-full space-x-4 mt-4">
-          <Button disabled={loading} type="submit">
-            <SendHorizonal className="w-4 h-4 shrink-0 inline-block" />
-          </Button>
-        </div>
+        <Button size="sm" disabled={loading}>
+          <SendHorizonal />
+        </Button>
       </form>
-    </Form>
+    </div>
   );
 };
 
