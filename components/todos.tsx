@@ -18,13 +18,6 @@ export default async function Todos() {
   }
   return (
     <main className="text-center m-auto my-12">
-      <Link
-        href="/new"
-        className="mx-10 text-green-500 underline font-semibold"
-      >
-        Add Task
-      </Link>
-      <br />
       {todos.length > 0 ? (
         todos.map((todo: Todo) => {
           return (
