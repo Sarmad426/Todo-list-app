@@ -30,7 +30,7 @@ const TodoForm = () => {
   return (
     <div className="flex flex-col items-center justify-center my-6 py-4">
       <h2 className="text-3xl font-semibold my-4">Todo App</h2>
-      <p className="my-3 text-muted-foreground">Remember it for future</p>
+      <p className="my-3 text-muted-foreground">Manage Tasks with Todo App.</p>
       <form
         onSubmit={handleTodo}
         className="flex items-center justify-center w-full gap-6 my-6"
