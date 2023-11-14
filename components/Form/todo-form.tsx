@@ -53,11 +53,12 @@ const TodoForm = () => {
               <FormLabel htmlFor="store-name">New Task</FormLabel>
               <FormControl>
                 <Input
+                  type="text"
                   disabled={loading}
                   placeholder="Task Name"
                   id="task-name"
                   {...field}
-                  //   className="lg:w-2/5 md:w-3/5 sm:w-4/5 w-5/6"
+                  className="border p-2 w-full"
                 />
               </FormControl>
               <FormMessage />
