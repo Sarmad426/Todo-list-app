@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
+import ToastProvider from "@/components/ui/Toaster";
 
 const font = Montserrat({ subsets: ["vietnamese"] });
 
@@ -19,7 +20,10 @@ export default function RootLayout({
       <head>
         <link rel="icon" type="png" href="logo.png" />
       </head>
-      <body className={font.className}>{children}</body>
+      <body className={font.className}>
+        <ToastProvider />
+        {children}
+      </body>
     </html>
   );
 }
