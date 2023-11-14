@@ -3,11 +3,12 @@ import Link from "next/link";
 import prisma from "@/lib/prismadb";
 import { Todo } from "@prisma/client";
 
-function getTodos() {
-  return prisma.todo.findMany();
+async function getTodos() {
+  const tasks = await prisma.todo.findMany();
+  return tasks;
 }
 export default async function Todos() {
-  let todos: Todo[] = await getTodos();
+  const todos: Todo[] = await getTodos();
   async function toggleTodo(id: string, completed: boolean) {
     "use server";
     await prisma.todo.update({ where: { id }, data: { completed } });
