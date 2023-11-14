@@ -19,6 +19,7 @@ const TodoForm = () => {
       handleNewTodo(title);
       router.refresh();
       toast.success("Todo added successfully");
+      setTitle("");
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong.");
