@@ -1,21 +1,24 @@
+import { deleteTodo } from "@/actions/actions";
 import TodoItem from "@/components/todoitem";
-import Link from "next/link";
 import prisma from "@/lib/prismadb";
 import { Todo } from "@prisma/client";
+import toast from "react-hot-toast";
 
-async function getTodos() {
-  const tasks = await prisma.todo.findMany();
-  return tasks;
+interface TodosProps {
+  todos: Todo[];
 }
-export default async function Todos() {
-  const todos: Todo[] = await getTodos();
+export default async function Todos({ todos }: TodosProps) {
   async function toggleTodo(id: string, completed: boolean) {
     "use server";
     await prisma.todo.update({ where: { id }, data: { completed } });
   }
   async function handleDelete(id: string) {
-    "use server";
-    await prisma.todo.delete({ where: { id } });
+    try {
+      deleteTodo(id);
+      toast.success("Todo deleted successfully");
+    } catch {
+      toast.error("Something went wrong");
+    }
   }
   return (
     <main className="text-center m-auto my-12">
@@ -26,7 +29,7 @@ export default async function Todos() {
               key={todo.id}
               {...todo}
               toggleTodo={toggleTodo}
-              handleDelete={handleDelete}
+              handleDelete={() => handleDelete(todo.id)}
             />
           );
         })
