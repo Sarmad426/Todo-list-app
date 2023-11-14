@@ -17,6 +17,17 @@ const TodoItem = ({
   handleDelete,
 }: TodoProps) => {
   const router = useRouter();
+
+  const deleteTodo = (id: string) => {
+    try {
+      handleDelete(id);
+      toast.success("Todo deleted successfully");
+      router.refresh();
+    } catch {
+      toast.error("Something went wrong");
+    }
+  };
+
   return (
     <div className="w-full m-5 px-2 grid grid-cols-2 gap-x-20 text-start lg:w-1/2 lg:text-center lg:mx-auto">
       <section>
@@ -37,7 +48,7 @@ const TodoItem = ({
       <section>
         <button
           className="mx-5 rounded-md py-1 px-2 bg-gray-100 hover:bg-gray-300"
-          onClick={() => handleDelete(id)}
+          onClick={() => deleteTodo(id)}
         >
           <Trash />
         </button>
