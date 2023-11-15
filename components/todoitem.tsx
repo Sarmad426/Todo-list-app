@@ -30,8 +30,8 @@ const TodoItem = ({ id, title, completed }: TodoProps) => {
     }
   }
   return (
-    <div className="w-full m-5 px-2 grid grid-cols-2 gap-x-20 text-start lg:w-1/2 lg:text-center lg:mx-auto">
-      <section>
+    <div className="flex items-center justify-normal gap-12">
+      <section className="flex-1 my-4">
         <input
           type="checkbox"
           className="peer cursor-pointer"
@@ -41,7 +41,7 @@ const TodoItem = ({ id, title, completed }: TodoProps) => {
         />
         <label
           htmlFor={id}
-          className="peer-checked:line-through cursor-pointer peer-checked:text-slate-500 mx-2 text-sm lg:text-lg"
+          className="peer-checked:line-through cursor-pointer peer-checked:text-slate-500 mx-4 text-sm lg:text-lg"
         >
           {title}
         </label>
