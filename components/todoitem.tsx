@@ -1,7 +1,7 @@
 "use client";
+import { deleteTodo } from "@/actions/actions";
 import { Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 interface TodoProps {
   title: string;
   id: string;
@@ -9,23 +9,12 @@ interface TodoProps {
   toggleTodo: (id: string, complete: boolean) => void;
   handleDelete: (id: string) => void;
 }
-const TodoItem = ({
-  id,
-  title,
-  completed,
-  toggleTodo,
-  handleDelete,
-}: TodoProps) => {
+const TodoItem = ({ id, title, completed, toggleTodo }: TodoProps) => {
   const router = useRouter();
 
-  const deleteTodo = (id: string) => {
-    try {
-      handleDelete(id);
-      toast.success("Todo deleted successfully");
-      router.refresh();
-    } catch {
-      toast.error("Something went wrong");
-    }
+  const handleDelete = (id: string) => {
+    deleteTodo(id);
+    router.refresh();
   };
 
   return (
@@ -48,7 +37,7 @@ const TodoItem = ({
       <section>
         <button
           className="mx-5 rounded-md py-1 px-2 bg-gray-100 hover:bg-gray-300"
-          onClick={() => deleteTodo(id)}
+          onClick={() => handleDelete(id)}
         >
           <Trash />
         </button>
