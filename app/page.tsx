@@ -13,6 +13,7 @@ const Home = async () => {
   const todos = await getTodoList();
   return (
     <main>
+      Data Added SuccessFully.
       <TodoForm />
       <Todos todos={todos} />
     </main>
