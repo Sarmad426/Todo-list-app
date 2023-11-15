@@ -5,7 +5,12 @@ import { Todo } from "@prisma/client";
 
 
 export const getTodoList = async (): Promise<Todo[]> => {
-    const todos = await prisma.todo.findMany();
+    const todos = await prisma.todo.findMany({ where: { completed: false } });
+    return todos;
+}
+
+export const getCompletedTodo = async (): Promise<Todo[]> => {
+    const todos = await prisma.todo.findMany({ where: { completed: true } });
     return todos;
 }
 
@@ -25,4 +30,9 @@ export const deleteTodo = async (id: string) => {
         },
     });
     return deletedTodo;
+}
+
+export const updateTodo = async (id: string, completed: boolean) => {
+    const updatedTodo = await prisma.todo.update({ where: { id }, data: { completed } });
+    return updatedTodo;
 }
