@@ -1,5 +1,3 @@
-"use server";
-
 import { getTodoList } from "@/actions/actions";
 import TodoForm from "@/components/Form/todo-form";
 import Todos from "@/components/todos";
