@@ -83,6 +83,7 @@ module.exports = {
           "scrollbar-width": 'none',
         }
       }
+      addUtilities(newUtilities);
     },
     require("tailwindcss-animate")
   ],
