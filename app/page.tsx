@@ -7,6 +7,8 @@ import prisma from "@/lib/prismadb";
 import { Todo } from "@prisma/client";
 import React from "react";
 
+export const revalidate = 0;
+
 const Home = async () => {
   const todos = await getTodoList();
   return (
