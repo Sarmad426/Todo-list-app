@@ -2,6 +2,7 @@
 import { deleteTodo } from "@/actions/actions";
 import { Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 interface TodoProps {
   title: string;
   id: string;
@@ -13,8 +14,13 @@ const TodoItem = ({ id, title, completed, toggleTodo }: TodoProps) => {
   const router = useRouter();
 
   const handleDelete = (id: string) => {
-    deleteTodo(id);
-    router.refresh();
+    try {
+      deleteTodo(id);
+      router.refresh();
+      toast.success("Todo deleted successfully.");
+    } catch {
+      toast.error("Something went wrong.");
+    }
   };
 
   return (
