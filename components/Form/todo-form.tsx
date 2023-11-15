@@ -7,6 +7,7 @@ import { handleNewTodo } from "@/actions/actions";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { revalidatePath } from "next/cache";
 
 const TodoForm = () => {
   const [title, setTitle] = useState("");
@@ -40,13 +41,13 @@ const TodoForm = () => {
           type="text"
           name="todo"
           placeholder="New Task Here..."
-          className="w-full lg:w-1/3 md:w-1/2"
+          className="w-full lg:w-1/3 md:w-1/2 disabled:opacity-50"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           disabled={loading}
           required
         />
-        <Button size="sm" disabled={loading}>
+        <Button size="sm" disabled={loading} className="disabled:opacity-50">
           <SendHorizonal />
         </Button>
       </form>
