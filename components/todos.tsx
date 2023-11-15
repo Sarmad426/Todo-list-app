@@ -1,21 +1,26 @@
-import { deleteTodo } from "@/actions/actions";
+"use client";
+import { deleteTodo, updateTodo } from "@/actions/actions";
 import TodoItem from "@/components/todoitem";
-import prisma from "@/lib/prismadb";
 import { Todo } from "@prisma/client";
-import { Router } from "lucide-react";
 import toast from "react-hot-toast";
 
 interface TodosProps {
   todos: Todo[];
 }
-export default async function Todos({ todos }: TodosProps) {
-  async function toggleTodo(id: string, completed: boolean) {
-    "use server";
-    await prisma.todo.update({ where: { id }, data: { completed } });
+export default function Todos({ todos }: TodosProps) {
+  function toggleTodo(id: string, completed: boolean) {
+    try {
+      updateTodo(id, completed);
+    } catch {
+      toast.error("Something went wrong");
+    }
   }
   async function handleDelete(id: string) {
-    "use server";
-    await deleteTodo(id);
+    try {
+      deleteTodo(id);
+    } catch {
+      toast.error("Something went wrong");
+    }
   }
   return (
     <main className="text-center m-auto my-12">
@@ -31,7 +36,7 @@ export default async function Todos({ todos }: TodosProps) {
           );
         })
       ) : (
-        <h2 className="my-8 text-2xl font-medium">No Tasks</h2>
+        <p className="my-8 text-lg text-muted-foreground">No Tasks</p>
       )}
     </main>
   );
