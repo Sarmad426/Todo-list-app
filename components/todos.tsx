@@ -14,7 +14,9 @@ export default function Todos({ todos }: TodosProps) {
           return <TodoItem key={todo.id} {...todo} />;
         })
       ) : (
-        <p className="my-8 text-lg text-muted-foreground">No Tasks</p>
+        <p className="my-8 text-lg text-muted-foreground text-center">
+          No Tasks
+        </p>
       )}
     </main>
   );
