@@ -10,14 +10,14 @@ const Home = async () => {
   return (
     <main>
       <TodoForm />
-      <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 w-screen">
-        <div className="w-full">
+      <div className="flex items-center justify-center gap-12 flex-wrap">
+        <div className="lg:w-1/3 md:w-2/5 w-[95%] py-4 px-2 overflow-scroll no-scrollbar">
           <h3 className="text-2xl font-semibold text-center text-gray-700">
             Pending Tasks
           </h3>
           <Todos todos={todos} />
         </div>
-        <div className="w-full">
+        <div className="lg:w-1/3 md:w-2/5 w-[95%] py-4 px-2 overflow-scroll no-scrollbar">
           <h3 className="text-2xl font-semibold text-center text-gray-700">
             Completed Tasks
           </h3>
