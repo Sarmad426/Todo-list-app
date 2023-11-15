@@ -7,7 +7,7 @@ const font = Montserrat({ subsets: ["vietnamese"] });
 
 export const metadata: Metadata = {
   title: "Todo App",
-  description: "Manage Tasks with Todo App.",
+  description: "Be Productive by managing tasks efficiently.",
 };
 
 export default function RootLayout({
