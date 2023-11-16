@@ -23,7 +23,7 @@ const TodosPage = async () => {
         </div>
         <div>
           <Link href="/" className={buttonVariants()}>
-            Add New <PlusCircle />{" "}
+            Add New <PlusCircle className="ml-2" />
           </Link>
         </div>
       </div>
