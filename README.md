@@ -23,3 +23,7 @@ Its a very basic todo list app to get started with **Next.js** Server actions.
 ### Visit
 
 <https://next-server-actions-todo-app-jade.vercel.app/>
+
+## Topics Covered
+
+This repository gives a start to the **Next.js Server Actions**. It also Covers **Prisma Schemas** , **React-Hook-Form** and **Zod** form validation.
