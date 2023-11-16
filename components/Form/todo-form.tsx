@@ -8,15 +8,11 @@ import { useRouter } from "next/navigation";
 import { handleNewTodo } from "@/actions/actions";
 import toast from "react-hot-toast";
 
-type TodoFormProps = {
-  onAddTodo: (text: string) => void;
-};
-
 type FormInputs = {
   todo: string;
 };
 
-const TodoForm: React.FC<TodoFormProps> = () => {
+const TodoForm = () => {
   const {
     register,
     handleSubmit,
