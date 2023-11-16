@@ -7,7 +7,6 @@ import { handleNewTodo } from "@/actions/actions";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { revalidatePath } from "next/cache";
 
 const TodoForm = () => {
   const [title, setTitle] = useState("");
